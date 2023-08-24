@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>dls-bluesky-core &#8212; dls-bluesky-core 0.1.dev62+g43d1d4b documentation</title>
+    <title>dls-bluesky-core &#8212; dls-bluesky-core 0.1.dev63+gaea4a26 documentation</title>
   
   
   
@@ -37,7 +37,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
-    <script src="_static/documentation_options.js?v=b329e1e0"></script>
+    <script src="_static/documentation_options.js?v=991ac9ce"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -390,13 +390,15 @@ document.write(`
   <section id="dls-bluesky-core">
 <h1>dls-bluesky-core<a class="headerlink" href="#dls-bluesky-core" title="Link to this heading">#</a></h1>
 <p><a class="reference external" href="https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/code.yml"><img alt="Code CI" src="https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/code.yml/badge.svg?branch=main" /></a> <a class="reference external" href="https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/docs.yml"><img alt="Docs CI" src="https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/docs.yml/badge.svg?branch=main" /></a> <a class="reference external" href="https://codecov.io/gh/DiamondLightSource/dls-bluesky-core"><img alt="Test Coverage" src="https://codecov.io/gh/DiamondLightSource/dls-bluesky-core/branch/main/graph/badge.svg" /></a> <a class="reference external" href="https://pypi.org/project/dls-bluesky-core"><img alt="Latest PyPI version" src="https://img.shields.io/pypi/v/dls-bluesky-core.svg" /></a> <a class="reference external" href="https://opensource.org/licenses/Apache-2.0"><img alt="Apache License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a></p>
-<p>This module stores Bluesky functionality that may be common to multiple technique repositories within Diamond Light
-Source.
-The ‘plans’ package stores fully realised instruction sets that perform an experiment and capture data.
-The ‘plan_stubs’ package stores modular partial instructions that may act as a building block for constructing ‘plans’
-or may be run to test operations without capturing data.
-It should be assumed that a plan opens at least one ‘Run’, while a plan_stub does not contain a complete Run, although
-it may open or close one.</p>
+<p>This module stores Bluesky functionality that is common to multiple techniques or groups within the Diamond Light Source
+organisation, such that it can be imported by instances of BlueAPI, or built upon within more focussed plan
+repositories to reduce duplication.</p>
+<p>The ‘plans’ package contains functions that describe a full operation which performs an experiment and captures data,
+and may wish to be available to instances of BlueAPI to allow common experiment types to be maintained centrally.
+The ‘stubs’ package contains modular partial instructions that may act as a building block for constructing plans, for
+which the implementation is common: e.g. querying APIs, standard handling of metadata
+The ‘tasks’ package contains instructions that are not sufficient to run a full experiment but are useful utilities for
+providing functionality to instances of BlueAPI: e.g. moving a motor.</p>
 <table class="table">
 <tbody>
 <tr class="row-odd"><td><p>PyPI</p></td>
@@ -414,23 +416,21 @@ it may open or close one.</p>
 </tbody>
 </table>
 <p>The module built from this repository is intended to either act directly as a source of plans for an instance of
-Bluesky directly by being a planFunctions source in the config of an instance.</p>
+BlueAPI by being a planFunctions source in the config of an instance:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">worker</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">env</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">sources</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">planFunctions</span>
 <span class="w">        </span><span class="nt">module</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dls_bluesky_core.plans</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">planFunctions</span>
+<span class="w">        </span><span class="nt">module</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dls_bluesky_core.tasks</span>
 </pre></div>
 </div>
-<p>Or else contributing towards the functionality required by a technique specific repository under the Diadmong</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dls_bluesky_core.plan_stubs</span>  <span class="k">as</span> <span class="nn">cps</span>
+<p>Or else contributing functionality that may be common with other plan repositories within Diamond.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">dls_bluesky_core.stubs</span>  <span class="k">as</span> <span class="nn">cps</span>
 
 <span class="k">def</span> <span class="nf">technique_specific_plan</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="k">yield from</span> <span class="n">cps</span><span class="o">.</span><span class="n">common_diamond_setup</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Or if it is a commandline tool then you might put some example commands here:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m dls_bluesky_core --version
 </pre></div>
 </div>
 <section id="how-the-documentation-is-structured">
