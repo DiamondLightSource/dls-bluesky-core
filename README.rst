@@ -3,14 +3,16 @@ dls-bluesky-core
 
 |code_ci| |docs_ci| |coverage| |pypi_version| |license|
 
-.. note::
+This module stores Bluesky functionality that is common to multiple techniques or groups within the Diamond Light Source
+organisation, such that it can be imported by instances of BlueAPI, or built upon within more focussed plan
+repositories to reduce duplication.
 
-    This project contains template code only. For documentation on how to
-    adopt this skeleton project see
-    https://DiamondLightSource.github.io/python3-pip-skeleton-cli
-
-This is where you should write a short paragraph that describes what your module does,
-how it does it, and why people should use it.
+The 'plans' package contains functions that describe a full operation which performs an experiment and captures data,
+and may wish to be available to instances of BlueAPI to allow common experiment types to be maintained centrally.
+The 'stubs' package contains modular partial instructions that may act as a building block for constructing plans, for
+which the implementation is common: e.g. querying APIs, standard handling of metadata
+The 'tasks' package contains instructions that are not sufficient to run a full experiment but are useful utilities for
+providing functionality to instances of BlueAPI: e.g. moving a motor.
 
 ============== ==============================================================
 PyPI           ``pip install dls-bluesky-core``
@@ -19,19 +21,27 @@ Documentation  https://DiamondLightSource.github.io/dls-bluesky-core
 Releases       https://github.com/DiamondLightSource/dls-bluesky-core/releases
 ============== ==============================================================
 
-This is where you should put some images or code snippets that illustrate
-some relevant examples. If it is a library then you might put some
-introductory code here:
+The module built from this repository is intended to either act directly as a source of plans for an instance of
+BlueAPI by being a planFunctions source in the config of an instance:
+
+.. code-block:: yaml
+
+    worker:
+      env:
+        sources:
+          - kind: planFunctions
+            module: dls_bluesky_core.plans
+          - kind: planFunctions
+            module: dls_bluesky_core.tasks
+
+Or else contributing functionality that may be common with other plan repositories within Diamond.
 
 .. code-block:: python
 
-    from dls_bluesky_core import __version__
+    import dls_bluesky_core.stubs  as cps
 
-    print(f"Hello dls_bluesky_core {__version__}")
-
-Or if it is a commandline tool then you might put some example commands here::
-
-    $ python -m dls_bluesky_core --version
+    def technique_specific_plan(*args, **kwargs):
+        yield from cps.common_diamond_setup()
 
 .. |code_ci| image:: https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/code.yml/badge.svg?branch=main
     :target: https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/code.yml
