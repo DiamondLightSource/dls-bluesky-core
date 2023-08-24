@@ -1,11 +1,18 @@
-from asyncio import Future
+from asyncio import Future, new_event_loop
 
 import pytest
 from bluesky import RunEngine
 from ophyd.sim import Syn2DGauss, SynAxis, SynGauss
 from scanspec.specs import Line, Spiral
 
-from blueapi.plans import scan
+from dls_bluesky_core.plans import scan
+
+
+@pytest.fixture(scope="session")
+def loop():
+    loop = new_event_loop()
+    yield loop
+    loop.stop()
 
 
 @pytest.fixture
@@ -30,7 +37,7 @@ def capture_document_return_token(future: Future, run_engine: RunEngine, name) -
     return run_engine.subscribe(name=name, func=set_result)
 
 
-def test_metadata_of_simple_spec(run_engine, x):
+def test_metadata_of_simple_spec(run_engine, x, loop):
     det = SynGauss(
         name="det",
         motor=x,
@@ -41,7 +48,7 @@ def test_metadata_of_simple_spec(run_engine, x):
     )
     spec = Line(axis=x.name, start=1, stop=2, num=3)
 
-    start_future = Future()
+    start_future = loop.create_future()
     tok = capture_document_return_token(start_future, run_engine, "start")
     run_engine(scan([det], {x.name: x}, spec))
     run_engine.unsubscribe(tok)
@@ -60,7 +67,7 @@ def test_metadata_of_simple_spec(run_engine, x):
     assert start_document["detectors"] == [det.name]
 
 
-def test_metadata_of_spiral_spec(run_engine, x, y):
+def test_metadata_of_spiral_spec(run_engine, x, y, loop):
     det = Syn2DGauss(
         name="det",
         motor0=x,
@@ -73,7 +80,7 @@ def test_metadata_of_spiral_spec(run_engine, x, y):
     )
     spec = Spiral.spaced(x.name, y.name, 0, 0, 5, 1)
 
-    start_future = Future()
+    start_future = loop.create_future()
     tok = capture_document_return_token(start_future, run_engine, "start")
     run_engine(scan([det], {x.name: x, y.name: y}, spec))
     run_engine.unsubscribe(tok)

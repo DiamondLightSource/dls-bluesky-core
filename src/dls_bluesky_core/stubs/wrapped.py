@@ -1,13 +1,16 @@
 import itertools
-from typing import Any, Mapping, Optional, TypeVar
+from typing import Annotated, Any, Mapping, Optional, TypeVar
 
 import bluesky.plan_stubs as bps
 from bluesky.protocols import Movable
 
-from blueapi.core import MsgGenerator
+from dls_bluesky_core.core import MsgGenerator
 
-Group = str
+"""
+Wrappers for Bluesky built-in plan stubs with type hinting
+"""
 
+Group = Annotated[str, "String identifier used by 'wait' or stubs that await"]
 T = TypeVar("T")
 
 
