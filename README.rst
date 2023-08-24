@@ -3,13 +3,16 @@ dls-bluesky-core
 
 |code_ci| |docs_ci| |coverage| |pypi_version| |license|
 
-This module stores Bluesky functionality that may be common to multiple technique repositories within Diamond Light
-Source.
-The 'plans' package stores fully realised instruction sets that perform an experiment and capture data.
-The 'plan_stubs' package stores modular partial instructions that may act as a building block for constructing 'plans'
-or may be run to test operations without capturing data.
-It should be assumed that a plan opens at least one 'Run', while a plan_stub does not contain a complete Run, although
-it may open or close one.
+This module stores Bluesky functionality that is common to multiple techniques or groups within the Diamond Light Source
+organisation, such that it can be imported by instances of BlueAPI, or built upon within more focussed plan
+repositories to reduce duplication.
+
+The 'plans' package contains functions that describe a full operation which performs an experiment and captures data,
+and may wish to be available to instances of BlueAPI to allow common experiment types to be maintained centrally.
+The 'stubs' package contains modular partial instructions that may act as a building block for constructing plans, for
+which the implementation is common: e.g. querying APIs, standard handling of metadata
+The 'tasks' package contains instructions that are not sufficient to run a full experiment but are useful utilities for
+providing functionality to instances of BlueAPI: e.g. moving a motor.
 
 ============== ==============================================================
 PyPI           ``pip install dls-bluesky-core``
@@ -19,7 +22,7 @@ Releases       https://github.com/DiamondLightSource/dls-bluesky-core/releases
 ============== ==============================================================
 
 The module built from this repository is intended to either act directly as a source of plans for an instance of
-Bluesky directly by being a planFunctions source in the config of an instance.
+BlueAPI by being a planFunctions source in the config of an instance:
 
 .. code-block:: yaml
 
@@ -28,20 +31,17 @@ Bluesky directly by being a planFunctions source in the config of an instance.
         sources:
           - kind: planFunctions
             module: dls_bluesky_core.plans
+          - kind: planFunctions
+            module: dls_bluesky_core.tasks
 
-Or else contributing towards the functionality required by a technique specific repository under the Diadmong
+Or else contributing functionality that may be common with other plan repositories within Diamond.
 
 .. code-block:: python
 
-    import dls_bluesky_core.plan_stubs  as cps
+    import dls_bluesky_core.stubs  as cps
 
     def technique_specific_plan(*args, **kwargs):
         yield from cps.common_diamond_setup()
-
-
-Or if it is a commandline tool then you might put some example commands here::
-
-    $ python -m dls_bluesky_core --version
 
 .. |code_ci| image:: https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/code.yml/badge.svg?branch=main
     :target: https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/code.yml
