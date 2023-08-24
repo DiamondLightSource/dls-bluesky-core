@@ -3,14 +3,13 @@ dls-bluesky-core
 
 |code_ci| |docs_ci| |coverage| |pypi_version| |license|
 
-.. note::
-
-    This project contains template code only. For documentation on how to
-    adopt this skeleton project see
-    https://DiamondLightSource.github.io/python3-pip-skeleton-cli
-
-This is where you should write a short paragraph that describes what your module does,
-how it does it, and why people should use it.
+This module stores Bluesky functionality that may be common to multiple technique repositories within Diamond Light
+Source.
+The 'plans' package stores fully realised instruction sets that perform an experiment and capture data.
+The 'plan_stubs' package stores modular partial instructions that may act as a building block for constructing 'plans'
+or may be run to test operations without capturing data.
+It should be assumed that a plan opens at least one 'Run', while a plan_stub does not contain a complete Run, although
+it may open or close one.
 
 ============== ==============================================================
 PyPI           ``pip install dls-bluesky-core``
@@ -19,15 +18,26 @@ Documentation  https://DiamondLightSource.github.io/dls-bluesky-core
 Releases       https://github.com/DiamondLightSource/dls-bluesky-core/releases
 ============== ==============================================================
 
-This is where you should put some images or code snippets that illustrate
-some relevant examples. If it is a library then you might put some
-introductory code here:
+The module built from this repository is intended to either act directly as a source of plans for an instance of
+Bluesky directly by being a planFunctions source in the config of an instance.
+
+.. code-block:: yaml
+
+    worker:
+      env:
+        sources:
+          - kind: planFunctions
+            module: dls_bluesky_core.plans
+
+Or else contributing towards the functionality required by a technique specific repository under the Diadmong
 
 .. code-block:: python
 
-    from dls_bluesky_core import __version__
+    import dls_bluesky_core.plan_stubs  as cps
 
-    print(f"Hello dls_bluesky_core {__version__}")
+    def technique_specific_plan(*args, **kwargs):
+        yield from cps.common_diamond_setup()
+
 
 Or if it is a commandline tool then you might put some example commands here::
 
