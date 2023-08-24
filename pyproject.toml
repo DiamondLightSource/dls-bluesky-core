@@ -13,6 +13,9 @@ classifiers = [
 ]
 description = "Common Diamond specific Bluesky plans and functions"
 dependencies = [
+    "blueapi",
+    "ophyd",
+    "scanspec"
 ] # Add project dependencies here, e.g. ["click", "numpy"]
 dynamic = ["version"]
 license.file = "LICENSE"
@@ -53,6 +56,10 @@ write_to = "src/dls_bluesky_core/_version.py"
 
 [tool.mypy]
 ignore_missing_imports = true # Ignore missing stubs in imported modules
+[[tool.mypy.overrides]]
+# Enforce disallow_untyped_degs on all src/ but not tests/
+module = 'dls_bluesky_core.*'
+disallow_untyped_defs = true
 
 [tool.isort]
 float_to_top = true
