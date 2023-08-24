@@ -4,6 +4,10 @@
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/main/"
   },
   {
+    "version": "hello_world",
+    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/hello_world/"
+  },
+  {
     "version": "merge_plans",
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/merge_plans/"
   }
