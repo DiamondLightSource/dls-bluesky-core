@@ -1,4 +1,4 @@
-python3-pip-skeleton
+dls-bluesky-core
 ===========================
 
 |code_ci| |docs_ci| |coverage| |pypi_version| |license|
@@ -13,10 +13,10 @@ This is where you should write a short paragraph that describes what your module
 how it does it, and why people should use it.
 
 ============== ==============================================================
-PyPI           ``pip install python3-pip-skeleton``
-Source code    https://github.com/DiamondLightSource/python3-pip-skeleton
-Documentation  https://DiamondLightSource.github.io/python3-pip-skeleton
-Releases       https://github.com/DiamondLightSource/python3-pip-skeleton/releases
+PyPI           ``pip install dls-bluesky-core``
+Source code    https://github.com/DiamondLightSource/dls-bluesky-core
+Documentation  https://DiamondLightSource.github.io/dls-bluesky-core
+Releases       https://github.com/DiamondLightSource/dls-bluesky-core/releases
 ============== ==============================================================
 
 This is where you should put some images or code snippets that illustrate
@@ -25,28 +25,28 @@ introductory code here:
 
 .. code-block:: python
 
-    from python3_pip_skeleton import __version__
+    from dls_bluesky_core import __version__
 
-    print(f"Hello python3_pip_skeleton {__version__}")
+    print(f"Hello dls_bluesky_core {__version__}")
 
 Or if it is a commandline tool then you might put some example commands here::
 
-    $ python -m python3_pip_skeleton --version
+    $ python -m dls_bluesky_core --version
 
-.. |code_ci| image:: https://github.com/DiamondLightSource/python3-pip-skeleton/actions/workflows/code.yml/badge.svg?branch=main
-    :target: https://github.com/DiamondLightSource/python3-pip-skeleton/actions/workflows/code.yml
+.. |code_ci| image:: https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/code.yml/badge.svg?branch=main
+    :target: https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/code.yml
     :alt: Code CI
 
-.. |docs_ci| image:: https://github.com/DiamondLightSource/python3-pip-skeleton/actions/workflows/docs.yml/badge.svg?branch=main
-    :target: https://github.com/DiamondLightSource/python3-pip-skeleton/actions/workflows/docs.yml
+.. |docs_ci| image:: https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/docs.yml/badge.svg?branch=main
+    :target: https://github.com/DiamondLightSource/dls-bluesky-core/actions/workflows/docs.yml
     :alt: Docs CI
 
-.. |coverage| image:: https://codecov.io/gh/DiamondLightSource/python3-pip-skeleton/branch/main/graph/badge.svg
-    :target: https://codecov.io/gh/DiamondLightSource/python3-pip-skeleton
+.. |coverage| image:: https://codecov.io/gh/DiamondLightSource/dls-bluesky-core/branch/main/graph/badge.svg
+    :target: https://codecov.io/gh/DiamondLightSource/dls-bluesky-core
     :alt: Test Coverage
 
-.. |pypi_version| image:: https://img.shields.io/pypi/v/python3-pip-skeleton.svg
-    :target: https://pypi.org/project/python3-pip-skeleton
+.. |pypi_version| image:: https://img.shields.io/pypi/v/dls-bluesky-core.svg
+    :target: https://pypi.org/project/dls-bluesky-core
     :alt: Latest PyPI version
 
 .. |license| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
@@ -57,4 +57,4 @@ Or if it is a commandline tool then you might put some example commands here::
     Anything below this line is used when viewing README.rst and will be replaced
     when included in index.rst
 
-See https://DiamondLightSource.github.io/python3-pip-skeleton for more detailed documentation.
+See https://DiamondLightSource.github.io/dls-bluesky-core for more detailed documentation.
