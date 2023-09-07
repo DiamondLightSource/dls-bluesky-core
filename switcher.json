@@ -2,9 +2,5 @@
   {
     "version": "main",
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/main/"
-  },
-  {
-    "version": "merge_plans",
-    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/merge_plans/"
   }
 ]
