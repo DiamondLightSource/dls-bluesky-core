@@ -6,5 +6,9 @@
   {
     "version": "0.0.1",
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/0.0.1/"
+  },
+  {
+    "version": "sample-metadata",
+    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/sample-metadata/"
   }
 ]
