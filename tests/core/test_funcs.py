@@ -1,8 +1,9 @@
+import uuid
 from typing import Optional
 
 import pytest
 
-from dls_bluesky_core.core import in_micros, step_to_num
+from dls_bluesky_core.core import group_uuid, in_micros, step_to_num
 
 
 @pytest.mark.parametrize(
@@ -36,6 +37,13 @@ def test_in_micros(us: float, s: int):
         (0, 0.98, 1, 1, 0),  # stop < start + 0.99*step, not included
         (0, 1.01, 1, 2, 1),  # stop >= start + 0.99*step, included
         (0, 1.75, 0.25, 8, 1.75),
+        (0, 0, -1, 1, None),  # start=stop, 1 point at start
+        (0, 0.5, -1, 1, 0),  # abs(step)>length, 1 point at start
+        (0, -1, 1, 2, None),  # stop=start+-abs(step), point at start & stop
+        (0, -0.99, 1, 2, -1),  # stop >= start + 0.99*-abs(step), included
+        (0, -0.98, 1, 1, 0),  # stop < start + 0.99*-abs(step), not included
+        (0, -1.01, 1, 2, -1),  # stop >= start + 0.99*-abs(step), included
+        (0, -1.75, 0.25, 8, -1.75),
     ],
 )
 def test_step_to_num(
@@ -50,3 +58,10 @@ def test_step_to_num(
     assert actual_start == start
     assert actual_stop == truncated_stop
     assert num == expected_num
+
+
+@pytest.mark.parametrize("group", ["foo", "bar", "baz", str(uuid.uuid4())])
+def test_group_uid(group: str):
+    gid = group_uuid(group)
+    assert gid.startswith(f"{group}-")
+    assert not gid.endswith(f"{group}-")
