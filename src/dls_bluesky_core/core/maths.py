@@ -27,10 +27,10 @@ def step_to_num(start: float, stop: float, step: float) -> Tuple[float, float, i
 
     """
     # Make step be the right direction
-    step = abs(step) if stop > start else -abs(step)
+    step = abs(step) if stop >= start else -abs(step)
     # If stop is within 1% of a step then include it
-    num = int((stop - start) / step + 0.01)
-    return start, start + num * step, num
+    steps = int((stop - start) / step + 0.01)
+    return start, start + steps * step, steps + 1  # include 1st point
 
 
 def in_micros(t: float) -> int:
@@ -44,4 +44,4 @@ def in_micros(t: float) -> int:
         t (int): A time in seconds rounded up to the nearest whole second,
         or other measurement in units of U, rounded up to the nearest whole U.
     """
-    return np.ceil(t / 1e6)
+    return int(np.ceil(t / 1e6))
