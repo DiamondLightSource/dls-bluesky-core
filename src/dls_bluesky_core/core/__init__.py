@@ -1,8 +1,7 @@
 from .coordination import group_uuid
-from .maths import step_to_num, in_micros
+from .maths import in_micros, step_to_num
 from .scanspecs import get_duration
 from .types import MsgGenerator, PlanGenerator, ScanAxis
-
 
 __all__ = [
     "get_duration",
@@ -11,5 +10,5 @@ __all__ = [
     "MsgGenerator",
     "PlanGenerator",
     "ScanAxis",
-    "step_to_num"
+    "step_to_num",
 ]
