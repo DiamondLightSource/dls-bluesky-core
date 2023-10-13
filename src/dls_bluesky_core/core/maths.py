@@ -35,13 +35,13 @@ def step_to_num(start: float, stop: float, step: float) -> Tuple[float, float, i
 
 def in_micros(t: float) -> int:
     """
-    Converts between units of microT and units of T.
-    For example, from microseconds to seconds.
+    Converts between units of T and units of microT.
+    For example, from seconds to microseconds.
 
     Args:
-        t (float): A time in microseconds, or other measurement in units of microU
+        t (float): A time in seconds, or other measurement in units of U
     Returns:
-        t (int): A time in seconds rounded up to the nearest whole second,
-        or other measurement in units of U, rounded up to the nearest whole U.
+        t (int): A time in microseconds, rounded up to the nearest whole microsecond,
+        or other measurement in units of microU, rounded up to the nearest whole microU.
     """
-    return int(np.ceil(t / 1e6))
+    return int(np.ceil(t * 1e6))
