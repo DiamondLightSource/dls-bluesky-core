@@ -12,20 +12,23 @@ from dls_bluesky_core.core import group_uuid, in_micros, step_to_num
         (4.000_001, 4_000_001),
         (4.999_999, 4_999_999),
         (4, 4_000_000),
-        (-4.000_001, -4_000_001),
-        (-4.999_999, -4_999_999),
-        (-4, -4_000_000),
         (4.000_000_1, 4_000_001),
         (4.999_999_9, 5_000_000),
         (0.1, 100_000),
         (0.000_000_1, 1),
-        (-4.000_000_5, -4_000_000),
-        (-4.999_999_9, -4_999_999),
-        (-4.05, -4_050_000),
+        (0, 0),
     ],
 )
 def test_in_micros(s: float, us: int):
     assert in_micros(s) == us
+
+
+@pytest.mark.parametrize(
+    "s", [-4.000_001, -4.999_999, -4, -4.000_000_5, -4.999_999_9, -4.05]
+)
+def test_in_micros_negative(s: float):
+    with pytest.raises(ValueError):
+        in_micros(s)
 
 
 @pytest.mark.parametrize(

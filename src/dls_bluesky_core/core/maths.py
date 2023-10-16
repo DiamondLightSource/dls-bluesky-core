@@ -40,8 +40,12 @@ def in_micros(t: float) -> int:
 
     Args:
         t (float): A time in seconds, or other measurement in units of U
+    Raises:
+        ValueError: if t < 0
     Returns:
         t (int): A time in microseconds, rounded up to the nearest whole microsecond,
         or other measurement in units of microU, rounded up to the nearest whole microU.
     """
+    if t < 0:
+        raise ValueError
     return int(np.ceil(t * 1e6))
