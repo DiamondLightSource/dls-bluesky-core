@@ -14,5 +14,9 @@
   {
     "version": "sample-metadata",
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/sample-metadata/"
+  },
+  {
+    "version": "scanspec_fly",
+    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/scanspec_fly/"
   }
 ]
