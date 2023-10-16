@@ -15,6 +15,7 @@ description = "Common Diamond specific Bluesky plans and functions"
 dependencies = [
     "blueapi",
     "ophyd",
+    "ophyd_async @ git+https://github.com/bluesky/ophyd-async.git@add-detector-logic",
     "scanspec"
 ] # Add project dependencies here, e.g. ["click", "numpy"]
 dynamic = ["version"]
