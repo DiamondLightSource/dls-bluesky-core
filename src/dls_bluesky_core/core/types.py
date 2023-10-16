@@ -8,4 +8,4 @@ from scanspec.specs import DURATION
 MsgGenerator = Generator[Msg, Any, None]
 #  'A function that generates a plan'
 PlanGenerator = Callable[..., MsgGenerator]
-ScanAxis = Union[Device, DURATION]
+ScannableAxis = Union[Device, DURATION]
