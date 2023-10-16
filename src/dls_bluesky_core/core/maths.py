@@ -46,5 +46,5 @@ def in_micros(t: float) -> int:
         t (int): A time in microseconds, rounded up to the nearest whole microsecond,
     """
     if t < 0:
-        raise ValueError
+        raise ValueError(f"Expected a positive time in seconds, got {t!r}")
     return int(np.ceil(t * 1e6))
