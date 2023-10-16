@@ -7,7 +7,7 @@ from bluesky.protocols import Movable, Readable
 from cycler import Cycler, cycler
 from scanspec.specs import Spec
 
-from ..core import MsgGenerator
+from dls_bluesky_core.core import MsgGenerator
 
 """
 Plans related to the use of the `ScanSpec https://github.com/dls-controls/scanspec`
