@@ -35,7 +35,7 @@ def step_to_num(start: float, stop: float, step: float) -> Tuple[float, float, i
 
 def in_micros(t: float) -> int:
     """
-    Converts between a positive number of seconds and an equivalent 
+    Converts between a positive number of seconds and an equivalent
     number of microseconds.
 
     Args:
