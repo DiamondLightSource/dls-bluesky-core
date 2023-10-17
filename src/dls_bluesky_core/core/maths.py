@@ -20,9 +20,9 @@ def step_to_num(start: float, stop: float, step: float) -> Tuple[float, float, i
             If stop < start, will be coerced to be backwards.
 
     Returns:
-        start, truncated_stop, num = Tuple[float, float, int]
+        start, adjusted_stop, num = Tuple[float, float, int]
         start will be returned unchanged
-        truncated_stop = start + num * step
+        adjusted_stop = start + (num - 1) * step
         num is the maximal number of steps that could fit into the length.
 
     """
