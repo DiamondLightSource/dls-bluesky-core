@@ -49,7 +49,7 @@ def test_in_micros_negative(s: float):
         (0, -1.01, 1, 2, -1),  # stop >= start + 0.99*-abs(step), included
         (0, -1.75, 0.25, 8, -1.75),
         (1, 10, -0.901, 10, 9.109),  # length overrules step for direction
-        (10, 1, -0.901, 10, 1.891)
+        (10, 1, -0.901, 10, 1.891),
     ],
 )
 def test_step_to_num(
