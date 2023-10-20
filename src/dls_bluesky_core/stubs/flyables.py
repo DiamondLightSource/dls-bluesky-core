@@ -5,7 +5,10 @@ from dls_bluesky_core.core import MsgGenerator, group_uuid
 
 
 def fly_and_collect(
-    flyer: Flyable, flush_period: float = 0.5, checkpoint_every_collect: bool = False
+    flyer: Flyable,
+    flush_period: float = 0.5,
+    checkpoint_every_collect: bool = False,
+    stream_name: str = "primary",
 ) -> MsgGenerator:
     yield from bps.kickoff(flyer)
     complete_group = group_uuid("complete")
@@ -18,6 +21,8 @@ def fly_and_collect(
             pass
         else:
             done = True
-        yield from bps.collect(flyer, stream=True, return_payload=False)
+        yield from bps.collect(
+            flyer, stream=True, return_payload=False, name=stream_name
+        )
         if checkpoint_every_collect:
             yield from bps.checkpoint()
