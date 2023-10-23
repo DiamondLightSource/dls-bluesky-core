@@ -10,7 +10,7 @@ def fly_and_collect(
     checkpoint_every_collect: bool = False,
     stream_name: str = "primary",
 ) -> MsgGenerator:
-    """Repeatedly fly and collect a flyer, flushing with a period.
+    """Fly and collect a flyer, waiting for collect to finish with a period.
 
     flyer.kickoff and complete are called, which starts the fly scanning process.
     bps.wait is called, which finishes after each flush period and then repeats, until
@@ -18,11 +18,12 @@ def fly_and_collect(
     produced.
 
     For some flyers, this plan will need to be called in succession in order to, for
-    example, set up a flyer to send triggers and collect data without pause. For such
+    example, set up a flyer to send triggers multiple times and collect data. For such
     a use case, this plan can be setup to checkpoint for each collect.
 
-    Note: this plan must be wrapped with calls to open and close a run, and the flyer
-    must implement the Collectable protocol.
+    Note: this plan must be wrapped with calls to open and close run, and the flyer
+    must implement the Collectable protocol. See tests/stubs/test_flyables for an
+    example.
 
     Args:
         flyer (Flyable, Collectable): ophyd-async device which implements Flyable and
