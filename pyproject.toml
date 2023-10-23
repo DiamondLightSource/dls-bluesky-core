@@ -15,8 +15,8 @@ description = "Common Diamond specific Bluesky plans and functions"
 dependencies = [
     "blueapi",
     "ophyd",
-    "ophyd_async @ git+https://github.com/bluesky/ophyd-async.git@add-detector-logic",
-    "scanspec"
+    "ophyd_async @ git+https://github.com/bluesky/ophyd-async.git",
+    "scanspec",
 ] # Add project dependencies here, e.g. ["click", "numpy"]
 dynamic = ["version"]
 license.file = "LICENSE"
@@ -85,6 +85,7 @@ addopts = """
 filterwarnings = "error"
 # Doctest python code in docs, python code in src docstrings, test functions in tests
 testpaths = "docs src tests"
+asyncio_mode = "auto"
 
 [tool.coverage.run]
 data_file = "/tmp/dls_bluesky_core.coverage"
