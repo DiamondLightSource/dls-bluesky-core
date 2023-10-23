@@ -14,7 +14,7 @@ def group_uuid(name: str) -> str:
     return f"{name}-{str(uuid.uuid4())[:6]}"
 
 
-def inject(name: str):
+def inject(name: str):  # type: ignore
     """
     Function to mark a default argument of a plan method as a reference to a device
     that is stored in the Blueapi context.
