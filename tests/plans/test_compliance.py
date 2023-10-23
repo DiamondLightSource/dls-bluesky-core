@@ -9,7 +9,7 @@ from dls_bluesky_core.core import MsgGenerator, PlanGenerator
 
 def is_bluesky_plan_generator(func: Any) -> bool:
     try:
-        return get_type_hints(func).get("return") is MsgGenerator
+        return get_type_hints(func).get("return") == MsgGenerator
     except TypeError:
         # get_type_hints fails on some objects (such as Union or Optional)
         return False
@@ -45,7 +45,7 @@ def assert_metadata_requirements(plan: PlanGenerator, signature: inspect.Signatu
     ), f"'{plan.__name__}' does not allow metadata"
     metadata = signature.parameters["metadata"]
     assert (
-        metadata.annotation is Optional[Mapping[str, Any]]
+        metadata.annotation == Optional[Mapping[str, Any]]
         and metadata.default is not inspect.Parameter.empty
     ), f"'{plan.__name__}' metadata is not optional"
     assert metadata.default is None, f"'{plan.__name__}' metadata default is mutable"
