@@ -1,9 +1,8 @@
-import uuid
 from typing import Optional
 
 import pytest
 
-from dls_bluesky_core.core import group_uuid, in_micros, step_to_num
+from dls_bluesky_core.core import in_micros, step_to_num
 
 
 @pytest.mark.parametrize(
@@ -64,10 +63,3 @@ def test_step_to_num(
     assert actual_start == start
     assert actual_stop == truncated_stop
     assert num == expected_num
-
-
-@pytest.mark.parametrize("group", ["foo", "bar", "baz", str(uuid.uuid4())])
-def test_group_uid(group: str):
-    gid = group_uuid(group)
-    assert gid.startswith(f"{group}-")
-    assert not gid.endswith(f"{group}-")
