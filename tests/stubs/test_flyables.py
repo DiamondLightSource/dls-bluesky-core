@@ -45,7 +45,9 @@ def flyer() -> Flyable:
 async def test_fly_and_collect(RE, flyer: DummyFlyer):
     def open_and_close_run_for_fly_and_collect():
         yield from bps.open_run()
-        yield from fly_and_collect(flyer, flush_period=0.01, checkpoint_every_collect=True)
+        yield from fly_and_collect(
+            flyer, flush_period=0.01, checkpoint_every_collect=True
+        )
         yield from bps.close_run()
 
     RE(open_and_close_run_for_fly_and_collect())
