@@ -14,7 +14,7 @@ classifiers = [
 description = "Common Diamond specific Bluesky plans and functions"
 dependencies = [
     "ophyd",
-    "ophyd_async @ git+https://github.com/bluesky/ophyd-async.git",
+    "ophyd_async @ git+https://github.com/bluesky/ophyd-async.git@main",
     "scanspec",
 ] # Add project dependencies here, e.g. ["click", "numpy"]
 dynamic = ["version"]
