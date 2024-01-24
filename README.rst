@@ -1,3 +1,7 @@
+# Deprecated
+
+To reduce the number of repositories to keep in sync, common plan functionality will be moved to the dls-dodal repository and use of this project discontinued.
+
 dls-bluesky-core
 ===========================
 
