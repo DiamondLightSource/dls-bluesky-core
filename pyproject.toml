@@ -16,6 +16,7 @@ dependencies = [
     "ophyd",
     "ophyd_async",
     "scanspec",
+    "dls-dodal",
 ] # Add project dependencies here, e.g. ["click", "numpy"]
 dynamic = ["version"]
 license.file = "LICENSE"
