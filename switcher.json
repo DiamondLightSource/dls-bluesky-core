@@ -16,6 +16,10 @@
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/0.0.1/"
   },
   {
+    "version": "metadata_decorator",
+    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/metadata_decorator/"
+  },
+  {
     "version": "rosesyrett-patch-1",
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/rosesyrett-patch-1/"
   },
