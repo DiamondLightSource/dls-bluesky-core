@@ -16,6 +16,10 @@
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/0.0.1/"
   },
   {
+    "version": "flyables",
+    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/flyables/"
+  },
+  {
     "version": "metadata_decorator",
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/metadata_decorator/"
   },
