@@ -1,7 +1,9 @@
 from typing import Any, List, Mapping, Optional, Union
 
 import bluesky.plans as bp
+import bluesky.preprocessors as bpp
 from bluesky.protocols import Readable
+from dodal.plans.data_session_metadata import attach_data_session_metadata_decorator
 
 from dls_bluesky_core.core import MsgGenerator
 
@@ -14,6 +16,7 @@ def count(
     detectors: List[Readable],
     num: int = 1,
     delay: Optional[Union[float, List[float]]] = None,
+    baseline: Optional[List[Readable]] = None,
     metadata: Optional[Mapping[str, Any]] = None,
 ) -> MsgGenerator:
     """
@@ -21,12 +24,14 @@ def count(
 
     Args:
         detectors (List[Readable]): Readable devices to read
-        num (int, optional): Number of readings to take. Defaults to 1.
-        delay (Optional[Union[float, List[float]]], optional): Delay between readings.
-                                                               Defaults to None.
-        metadata (Optional[Mapping[str, Any]], optional): Key-value metadata to include
-                                                          in exported data.
-                                                          Defaults to None.
+        num (int): Number of readings to take. Defaults to 1.
+        delay (Optional[Union[float, List[float]]]): Delay between readings.
+                                                        Defaults to None.
+        baseline (Optional[List[Readable]]): List of devices to read at start
+                                                        and end of scan
+        metadata (Optional[Mapping[str, Any]]): Key-value metadata to include
+                                                        in exported data.
+                                                        Defaults to None.
 
     Returns:
         MsgGenerator: _description_
@@ -34,17 +39,11 @@ def count(
     Yields:
         Iterator[MsgGenerator]: _description_
     """
-    plan_args = (
-        {  # If bp.count added delay to plan_args, we could remove all md handling
-            "detectors": list(map(repr, detectors)),
-            "num": num,
-            "delay": delay,
-        }
-    )
+    baseline = baseline or []
 
-    _md = {
-        "plan_args": plan_args,
-        **(metadata or {}),
-    }
+    @bpp.baseline_decorator(baseline)
+    @attach_data_session_metadata_decorator(provider=None)
+    def inner_plan() -> MsgGenerator:
+        yield from bp.count(detectors, num, delay=delay, md=metadata)
 
-    yield from bp.count(detectors, num, delay=delay, md=_md)
+    yield from inner_plan()
