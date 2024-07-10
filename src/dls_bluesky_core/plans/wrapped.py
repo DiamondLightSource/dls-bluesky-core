@@ -11,7 +11,7 @@ Wrappers for Bluesky built-in plans with type hinting and renamed metadata
 
 
 def count(
-    detectors: List[Readable],
+    detectors: set[Readable],
     num: int = 1,
     delay: Optional[Union[float, List[float]]] = None,
     metadata: Optional[Mapping[str, Any]] = None,
@@ -20,7 +20,7 @@ def count(
     Take `n` readings from a device
 
     Args:
-        detectors (List[Readable]): Readable devices to read
+        detectors (Set[Readable]): Readable devices to read
         num (int, optional): Number of readings to take. Defaults to 1.
         delay (Optional[Union[float, List[float]]], optional): Delay between readings.
                                                                Defaults to None.
@@ -34,17 +34,5 @@ def count(
     Yields:
         Iterator[MsgGenerator]: _description_
     """
-    plan_args = (
-        {  # If bp.count added delay to plan_args, we could remove all md handling
-            "detectors": list(map(repr, detectors)),
-            "num": num,
-            "delay": delay,
-        }
-    )
 
-    _md = {
-        "plan_args": plan_args,
-        **(metadata or {}),
-    }
-
-    yield from bp.count(detectors, num, delay=delay, md=_md)
+    yield from bp.count(detectors, num, delay=delay, md=metadata or {})

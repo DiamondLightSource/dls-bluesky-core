@@ -57,7 +57,7 @@ def test_metadata_of_simple_spec(run_engine, x, loop):
     plan_args = start_document["plan_args"]
 
     assert len(plan_args) == 3
-    assert plan_args["detectors"] == [repr(det)]
+    assert plan_args["detectors"] == {repr(det)}
     assert plan_args["spec"] == repr(spec)
     assert plan_args["axes_to_move"] == {
         x.name: repr(x),
@@ -89,7 +89,7 @@ def test_metadata_of_spiral_spec(run_engine, x, y, loop):
     plan_args = start_document["plan_args"]
 
     assert len(plan_args) == 3
-    assert plan_args["detectors"] == [repr(det)]
+    assert plan_args["detectors"] == {repr(det)}
     assert plan_args["spec"] == repr(spec)
     assert plan_args["axes_to_move"] == {x.name: repr(x), y.name: repr(y)}
 
