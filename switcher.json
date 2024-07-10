@@ -34,5 +34,9 @@
   {
     "version": "scanspec_fly",
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/scanspec_fly/"
+  },
+  {
+    "version": "set",
+    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/set/"
   }
 ]
