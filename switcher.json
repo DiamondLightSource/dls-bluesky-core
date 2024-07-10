@@ -4,20 +4,16 @@
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/main/"
   },
   {
-    "version": "0.0.3",
-    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/0.0.3/"
+    "version": "0.0.1",
+    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/0.0.1/"
   },
   {
     "version": "0.0.2-alpha",
     "url": "https://DiamondLightSource.github.io/dls-bluesky-core/0.0.2-alpha/"
   },
   {
-    "version": "0.0.1",
-    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/0.0.1/"
-  },
-  {
-    "version": "flyables",
-    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/flyables/"
+    "version": "0.0.3",
+    "url": "https://DiamondLightSource.github.io/dls-bluesky-core/0.0.3/"
   },
   {
     "version": "metadata_decorator",
