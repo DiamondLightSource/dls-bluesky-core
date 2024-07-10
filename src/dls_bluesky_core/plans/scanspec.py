@@ -1,6 +1,6 @@
 import operator
 from functools import reduce
-from typing import Any, List, Mapping, Optional
+from typing import Any, Mapping, Optional
 
 import bluesky.plans as bp
 from bluesky.protocols import Movable, Readable
@@ -17,7 +17,7 @@ Diamond's "mapping scans" using ScanPointGenerator.
 
 
 def scan(
-    detectors: List[Readable],
+    detectors: set[Readable],
     axes_to_move: Mapping[str, Movable],
     spec: Spec[str],
     metadata: Optional[Mapping[str, Any]] = None,
@@ -26,7 +26,7 @@ def scan(
     Scan wrapping `bp.scan_nd`
 
     Args:
-        detectors: List of readable devices, will take a reading at
+        detectors: Set of readable devices, will take a reading at
                                     each point
         axes_to_move: All axes involved in this scan, names and
             objects
@@ -44,7 +44,7 @@ def scan(
 
     _md = {
         "plan_args": {
-            "detectors": list(map(repr, detectors)),
+            "detectors": set(map(repr, detectors)),
             "axes_to_move": {k: repr(v) for k, v in axes_to_move.items()},
             "spec": repr(spec),
         },
