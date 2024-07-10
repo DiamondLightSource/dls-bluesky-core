@@ -34,16 +34,5 @@ def count(
     Yields:
         Iterator[MsgGenerator]: _description_
     """
-    plan_args = {
-        # If bp.count added delay to plan_args, we could remove all md handling
-        "detectors": set(map(repr, detectors)),
-        "num": num,
-        "delay": delay,
-    }
 
-    _md = {
-        "plan_args": plan_args,
-        **(metadata or {}),
-    }
-
-    yield from bp.count(detectors, num, delay=delay, md=_md)
+    yield from bp.count(detectors, num, delay=delay, md=metadata or {})
